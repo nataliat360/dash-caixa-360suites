@@ -470,10 +470,11 @@ function renderEvoDia(dia) {
     elD.innerHTML = '<div class="evo-vazio">Sem detalhamento disponível para este dia (sem atualização registrada).</div>';
     return;
   }
-  // O bundle completo (receita + despesa + validador) vem repetido em receitaTotal.nota
-  // e despesaTotal.nota; aqui separa por card e distribui: 1º card (Receita) na caixa
-  // de receita, os demais (Despesa + Validador) na caixa de despesa.
-  const bundle = (nota.receitaTotal && nota.receitaTotal.nota) || (nota.despesaTotal && nota.despesaTotal.nota) || '';
+  // O bundle completo (receita + despesa + validador) vem em nota.saldoUltimoDia.nota
+  // (formato atual do dashboard desktop) ou, em versões antigas, repetido em
+  // receitaTotal.nota/despesaTotal.nota; aqui separa por card e distribui: cards de
+  // receita na caixa de receita, os demais (Despesa + Validador) na caixa de despesa.
+  const bundle = (nota.saldoUltimoDia && nota.saldoUltimoDia.nota) || (nota.receitaTotal && nota.receitaTotal.nota) || (nota.despesaTotal && nota.despesaTotal.nota) || '';
   const cards = splitNotaCards(bundle);
   const cardsReceita = cards.filter(c => /receita/i.test(tituloDoCard(c)) && !/despesa/i.test(tituloDoCard(c)));
   const cardsDespesa = cards.filter(c => !cardsReceita.includes(c));
