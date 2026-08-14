@@ -121,23 +121,44 @@
   .evo-delta.pos { color: var(--verde); background: var(--verde-bg); }
   .evo-delta.neg { color: var(--vermelho); background: var(--vermelho-bg); }
   .evo-subtitulo { font-size: 11.5px; font-weight:800; color: var(--marca); text-transform:uppercase; letter-spacing:.03em; margin: 14px 0 8px; }
-  .evo-nota { font-size: 12px; color: var(--cinza); line-height:1.6; background: var(--fundo); border-radius:10px; padding:10px 11px; }
-  .evo-nota strong { color: var(--texto); }
-  .evo-nota .delta-up { color: var(--verde); font-weight:700; }
-  .evo-nota .delta-down { color: var(--vermelho); font-weight:700; }
-  .evo-nota .delta-neutral { color: var(--cinza); }
-  /* cards de variação (formato novo: notaCard/notaBox/notaRow/val) */
-  .evo-nota .notaCard { margin-bottom: 12px; }
-  .evo-nota .notaCard:last-child { margin-bottom: 0; }
-  .evo-nota .notaTitulo { display: none; } /* já mostrado no evo-subtitulo acima */
-  .evo-nota .notaBox { display: flex; flex-direction: column; }
-  .evo-nota .notaRow { display: flex; justify-content: space-between; align-items: baseline;
-    gap: 10px; padding: 4px 0; font-size: 12.5px; color: var(--texto); border-bottom: 1px solid var(--borda); }
-  .evo-nota .notaRow:last-child { border-bottom: none; }
-  .evo-nota .notaRow.total { font-weight: 800; font-size: 13px; border-bottom: 1.5px solid var(--marca); padding-bottom: 6px; margin-bottom: 2px; }
-  .evo-nota .notaRow span:first-child { flex: 1 1 auto; }
-  .evo-nota .notaRow .val { font-weight: 700; white-space: nowrap; flex: 0 0 auto; }
   .evo-vazio { font-size: 12px; color: var(--cinza); font-style: italic; padding: 8px 2px; }
+
+  /* resumo sempre visível (card "Validador": Receita total / Despesa total / Validador) */
+  .evo-validador { background: var(--fundo); border-radius: 12px; padding: 2px 12px; margin: 12px 0; }
+  .evo-validador:empty { display: none; margin: 0; padding: 0; }
+  .evo-validador .notaTitulo { display: none; }
+  .evo-validador .notaBox { display: flex; flex-direction: column; }
+  .evo-validador .notaRow { display:flex; justify-content:space-between; align-items:baseline;
+    padding: 10px 0; border-bottom: 1px solid var(--borda); font-size: 13px; color: var(--texto); }
+  .evo-validador .notaRow:last-child { border-bottom: none; }
+  .evo-validador .notaRow.destaque { font-weight: 800; }
+  .evo-validador .notaRow .val { font-weight: 700; }
+
+  /* agrupador recolhível com o detalhamento (receita e despesa) */
+  .evo-detalhe-group summary { list-style:none; cursor:pointer; font-size:12.5px; font-weight:700;
+    color: var(--marca); padding: 10px 2px; }
+  .evo-detalhe-group summary::-webkit-details-marker { display:none; }
+  .evo-detalhe-group summary::after { content:" ▾"; }
+  .evo-detalhe-group[open] summary::after { content:" ▴"; }
+
+  /* cards de variação (formato novo: notaCard/notaBox/notaRow/val) */
+  .evo-nota-card { background:#fff; border:1px solid var(--borda); border-radius:14px;
+    padding:12px 14px; margin-bottom:12px; box-shadow: 0 1px 3px rgba(20,30,50,.06); }
+  .evo-nota-card:last-child { margin-bottom: 0; }
+  .evo-nota-card strong { color: var(--texto); }
+  .evo-nota-card .delta-up { color: var(--verde); font-weight:700; }
+  .evo-nota-card .delta-down { color: var(--vermelho); font-weight:700; }
+  .evo-nota-card .delta-neutral { color: var(--cinza); }
+  .evo-nota-card .notaCard { margin-bottom: 12px; }
+  .evo-nota-card .notaCard:last-child { margin-bottom: 0; }
+  .evo-nota-card .notaTitulo { display: none; } /* já mostrado no evo-subtitulo acima */
+  .evo-nota-card .notaBox { display: flex; flex-direction: column; }
+  .evo-nota-card .notaRow { display: flex; justify-content: space-between; align-items: baseline;
+    gap: 10px; padding: 6px 0; font-size: 12.5px; color: var(--texto); border-bottom: 1px solid var(--borda); }
+  .evo-nota-card .notaRow:last-child { border-bottom: none; }
+  .evo-nota-card .notaRow.total { font-weight: 800; font-size: 13px; border-bottom: 1.5px solid var(--marca); padding-bottom: 8px; margin-bottom: 2px; }
+  .evo-nota-card .notaRow span:first-child { flex: 1 1 auto; }
+  .evo-nota-card .notaRow .val { font-weight: 700; white-space: nowrap; flex: 0 0 auto; }
 
   .hist-track { display:flex; gap:6px; margin-top: 4px; overflow-x:auto; padding-bottom:2px; }
   .hist-chip { flex: 0 0 auto; min-width: 66px; text-align:center; background: var(--fundo);
@@ -242,29 +263,33 @@
   <div class="card">
     <div class="evo-delta neg">Piorou R$ 47.836,85 desde 13/08 (estava -R$ 270 mil)</div>
     <div class="evo-subtitulo">Últimos dias — saldo projetado 31/08 (toque para ver o que mudou)</div>
-    <div class="hist-track" id="histTrack"><button class="hist-chip" data-dia="2026-08-07">
+    <div class="hist-track" id="histTrack"><button class="hist-chip" data-dia="2026-08-04">
+        <span class="hist-chip-data">04/08</span>
+        <span class="hist-chip-val neg">-R$ 610 mil</span>
+      </button><button class="hist-chip" data-dia="2026-08-05">
+        <span class="hist-chip-data">05/08</span>
+        <span class="hist-chip-val neg">-R$ 528 mil</span>
+      </button><button class="hist-chip" data-dia="2026-08-06">
+        <span class="hist-chip-data">06/08</span>
+        <span class="hist-chip-val neg">-R$ 529 mil</span>
+      </button><button class="hist-chip" data-dia="2026-08-07">
         <span class="hist-chip-data">07/08</span>
         <span class="hist-chip-val neg">-R$ 481 mil</span>
       </button><button class="hist-chip" data-dia="2026-08-10">
         <span class="hist-chip-data">10/08</span>
         <span class="hist-chip-val neg">-R$ 230 mil</span>
-      </button><button class="hist-chip" data-dia="2026-08-11">
+      </button><button class="hist-chip ativo" data-dia="2026-08-11">
         <span class="hist-chip-data">11/08</span>
-        <span class="hist-chip-val neg">-R$ 210 mil</span>
-      </button><button class="hist-chip" data-dia="2026-08-12">
-        <span class="hist-chip-data">12/08</span>
-        <span class="hist-chip-val neg">-R$ 221 mil</span>
-      </button><button class="hist-chip" data-dia="2026-08-13">
-        <span class="hist-chip-data">13/08</span>
-        <span class="hist-chip-val neg">-R$ 270 mil</span>
-      </button><button class="hist-chip ativo" data-dia="2026-08-14">
-        <span class="hist-chip-data">14/08</span>
-        <span class="hist-chip-val neg">-R$ 318 mil</span>
+        <span class="hist-chip-val neg">-R$ 204 mil</span>
       </button></div>
-    <div class="evo-subtitulo" id="evoTituloReceita">O que mudou na receita — 11/08</div>
-    <div class="evo-nota" id="evoNotaReceita"></div>
-    <div class="evo-subtitulo" id="evoTituloDespesa">O que mudou na despesa — 11/08</div>
-    <div class="evo-nota" id="evoNotaDespesa"></div>
+    <div class="evo-validador" id="evoValidador"></div>
+    <details class="evo-detalhe-group">
+      <summary>Ver o que mudou</summary>
+      <div class="evo-subtitulo" id="evoTituloReceita">O que mudou na receita — 11/08</div>
+      <div class="evo-nota-card" id="evoNotaReceita"></div>
+      <div class="evo-subtitulo" id="evoTituloDespesa">O que mudou na despesa — 11/08</div>
+      <div class="evo-nota-card" id="evoNotaDespesa"></div>
+    </details>
   </div>
 
   <div class="section-title">Receita por canal</div>
@@ -463,22 +488,27 @@ function renderEvoDia(dia) {
   document.getElementById('evoTituloReceita').textContent = 'O que mudou na receita — ' + fmtDataBr(dia);
   document.getElementById('evoTituloDespesa').textContent = 'O que mudou na despesa — ' + fmtDataBr(dia);
   const nota = DADOS.anotacoes[dia];
+  const elV = document.getElementById('evoValidador');
   const elR = document.getElementById('evoNotaReceita');
   const elD = document.getElementById('evoNotaDespesa');
   if (!nota) {
+    elV.innerHTML = '';
     elR.innerHTML = '<div class="evo-vazio">Sem detalhamento disponível para este dia (sem atualização registrada).</div>';
     elD.innerHTML = '<div class="evo-vazio">Sem detalhamento disponível para este dia (sem atualização registrada).</div>';
     return;
   }
-  // O bundle completo (receita + despesa + validador) vem em nota.saldoUltimoDia.nota
+  // O bundle completo (validador + receita + despesa) vem em nota.saldoUltimoDia.nota
   // (formato atual do dashboard desktop) ou, em versões antigas, repetido em
-  // receitaTotal.nota/despesaTotal.nota; aqui separa por card e distribui: cards de
-  // receita na caixa de receita, os demais (Despesa + Validador) na caixa de despesa.
+  // receitaTotal.nota/despesaTotal.nota; aqui separa por card: o "Validador" fica
+  // sempre visível (resumo), receita e despesa ficam dentro do agrupador recolhível.
   const bundle = (nota.saldoUltimoDia && nota.saldoUltimoDia.nota) || (nota.receitaTotal && nota.receitaTotal.nota) || (nota.despesaTotal && nota.despesaTotal.nota) || '';
   const cards = splitNotaCards(bundle);
-  const cardsReceita = cards.filter(c => /receita/i.test(tituloDoCard(c)) && !/despesa/i.test(tituloDoCard(c)));
-  const cardsDespesa = cards.filter(c => !cardsReceita.includes(c));
+  const cardsValidador = cards.filter(c => /validador/i.test(tituloDoCard(c)));
+  const semValidador = cards.filter(c => !cardsValidador.includes(c));
+  const cardsReceita = semValidador.filter(c => /receita/i.test(tituloDoCard(c)) && !/despesa/i.test(tituloDoCard(c)));
+  const cardsDespesa = semValidador.filter(c => !cardsReceita.includes(c));
 
+  elV.innerHTML = limpaCores(cardsValidador.join(''));
   elR.innerHTML = limpaCores(cardsReceita.join('')) || '<div class="evo-vazio">Sem variação de receita registrada.</div>';
   elD.innerHTML = limpaCores(mergeDebitoAutomatico(cardsDespesa.join(''))) || '<div class="evo-vazio">Sem variação de despesa registrada.</div>';
 }
