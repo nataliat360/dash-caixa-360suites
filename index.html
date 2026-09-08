@@ -10,6 +10,7 @@
   :root {
     --marca: #14171f;
     --marca-clara: #6b7280;
+    --tabbar-bg: #1f3a5f;
     --dourado: #F2B90C;
     --dourado-escuro: #B8860B;
     --dourado-bg: #fdf3d6;
@@ -186,19 +187,19 @@
 
   .tabbar {
     position: fixed; left:0; right:0; bottom:0; z-index: 20;
-    background: var(--card); border-top: 1px solid var(--borda);
-    box-shadow: 0 -2px 10px rgba(20,30,50,.06);
+    background: var(--tabbar-bg);
+    box-shadow: 0 -2px 10px rgba(20,30,50,.15);
     display:flex; padding: 6px 6px calc(6px + env(safe-area-inset-bottom));
   }
   .tabbar-btn {
     flex: 1 1 0; display:flex; flex-direction:column; align-items:center; justify-content:center;
     gap: 3px; padding: 6px 2px; border:none; background:transparent; cursor:pointer;
-    font-family: inherit; color: var(--cinza); border-radius: 12px;
+    font-family: inherit; color: #fff; border-radius: 12px;
   }
   .tabbar-btn svg { width:20px; height:20px; stroke: currentColor; }
   .tabbar-btn span { font-size: 10.5px; font-weight:700; letter-spacing:.01em; }
-  .tabbar-btn.ativo { color: var(--dourado-escuro); }
-  .tabbar-btn.ativo svg { stroke: var(--dourado-escuro); }
+  .tabbar-btn.ativo { color: var(--dourado); }
+  .tabbar-btn.ativo svg { stroke: var(--dourado); }
 </style>
 </head>
 <body>
