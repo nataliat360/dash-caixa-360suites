@@ -6,6 +6,9 @@
 <title>360 Suites — Fluxo de Caixa Executivo</title>
 <style>
   :root {
+    --azul: #181818;
+    --azul-claro: #3d4552;
+    --crimson: #c0304a;
     --marca: #1f3a5f;
     --marca-clara: #5a7595;
     --verde: #157f3c;
@@ -19,6 +22,8 @@
     --texto: #1f2530;
     --cinza: #6b7280;
     --borda: #e4e7ec;
+    --shadow-sm: 0 1px 2px rgba(16,24,40,.05);
+    --shadow-md: 0 1px 3px rgba(16,24,40,.06), 0 1px 2px rgba(16,24,40,.04);
   }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { margin:0; padding:0; background:var(--fundo); color:var(--texto);
@@ -27,7 +32,7 @@
   .wrap { max-width: 480px; margin: 0 auto; padding: 0 14px; }
 
   header.top {
-    background: var(--marca); color: #fff; padding: 18px 14px 20px;
+    background: var(--azul); color: #fff; padding: 18px 14px 20px;
     border-radius: 0 0 20px 20px; margin-bottom: 16px;
   }
   header.top .row1 { display:flex; align-items:center; gap:10px; }
@@ -46,7 +51,7 @@
   .alerta .txt span { display:block; font-weight:400; color:#7a2a22; margin-top:2px; font-size:12.5px; }
 
   .card { background: var(--card); border-radius: 16px; padding: 16px;
-    margin-bottom: 14px; box-shadow: 0 1px 3px rgba(20,30,50,.06), 0 1px 2px rgba(20,30,50,.04); }
+    margin-bottom: 14px; box-shadow: var(--shadow-md); }
 
   .label { font-size: 11.5px; text-transform: uppercase; letter-spacing: .04em;
     color: var(--cinza); font-weight: 700; margin-bottom: 6px; }
@@ -62,7 +67,7 @@
   .grid2 .card { margin-bottom:0; padding: 14px; }
   .grid2 .hero { font-size: 22px; }
 
-  .section-title { font-size: 15px; font-weight: 800; margin: 22px 0 10px; color: var(--marca); }
+  .section-title { font-size: 15px; font-weight: 800; margin: 22px 0 10px; color: var(--azul); }
 
   /* meta / atingimento */
   .meta-row { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px; }
@@ -103,7 +108,7 @@
   .canal-vals { font-size: 11.5px; color: var(--cinza); margin-top:4px; }
 
   .canal-total-row { display:flex; justify-content:space-between; align-items:center; }
-  .canal-total-num { font-size: 24px; font-weight: 800; color: var(--marca); }
+  .canal-total-num { font-size: 24px; font-weight: 800; color: var(--azul); }
   .canal-total-pct { font-size: 15px; font-weight: 800; }
   .canal-total-sub { font-size: 12px; color: var(--cinza); margin-top:2px; }
 
@@ -143,7 +148,7 @@
 
   /* cards de variação (formato novo: notaCard/notaBox/notaRow/val) */
   .evo-nota-card { background:#fff; border:1px solid var(--borda); border-radius:14px;
-    padding:12px 14px; margin-bottom:12px; box-shadow: 0 1px 3px rgba(20,30,50,.06); }
+    padding:12px 14px; margin-bottom:12px; box-shadow: var(--shadow-sm); }
   .evo-nota-card:last-child { margin-bottom: 0; }
   .evo-nota-card strong { color: var(--texto); }
   .evo-nota-card .delta-up { color: var(--verde); font-weight:700; }
